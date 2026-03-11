@@ -29,4 +29,10 @@ class BookController extends Controller
         $books = Book::orderBy('views','desc')->take(3)->get();
         return response()->json($books);
     }
+
+    public function newBooks() {
+        $books = Book::orderBy('created_at' , 'desc')->take(10)->get();
+
+        return response()->json($books);
+    }
 }

@@ -17,3 +17,5 @@ Route::post('/login',[AuthController::class, 'login']);
 Route::get('/categories/{id}/books', [BookController::class , 'booksByCategory']);
 Route::get('/books/search', [BookController::class , 'search']);
 Route::get('/books/popular', [BookController::class, 'popular']);
+Route::get('/books/new', [BookController::class, 'newBooks']);
+
