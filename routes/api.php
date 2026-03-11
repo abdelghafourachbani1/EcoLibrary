@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\categoryController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -24,5 +25,11 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/categories',[categoryController::class , 'store']);
     Route::put('/categories/{id}',[categoryController::class , 'update']);
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+
+    Route::post('/books', [BookController::class, 'store']);
+    Route::put('/books/{id}', [BookController::class, 'update']);
+    Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+    Route::get('/stats/most-viewed', [StatisticsController::class, 'mostViewed']);
 });
 

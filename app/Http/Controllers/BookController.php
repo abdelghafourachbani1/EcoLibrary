@@ -35,4 +35,67 @@ class BookController extends Controller
 
         return response()->json($books);
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'nullable|in:available,degraded',
+            'views' => 'nullable|integer|min:0'
+        ]);
+
+        $book = Book::create([
+            'title' => $request->title,
+            'author' => $request->author,
+            'category_id' => $request->category_id,
+            'status' => $request->status ?? 'available',
+            'views' => $request->views ?? 0
+        ]);
+
+        return response()->json([
+            'message' => 'Book created successfully',
+            'book' => $book
+        ], 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'status' => 'nullable|in:available,degraded',
+            'views' => 'nullable|integer|min:0'
+        ]);
+
+        $book->update([
+            'title' => $request->title,
+            'author' => $request->author,
+            'category_id' => $request->category_id,
+            'status' => $request->status ?? $book->status,
+            'views' => $request->views ?? $book->views
+        ]);
+
+        return response()->json([
+            'message' => 'Book updated successfully',
+            'book' => $book
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return response()->json([
+            'message' => 'Book deleted successfully'
+        ]);
+    }
+
+
+
 }
