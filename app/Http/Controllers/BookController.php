@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class BookController extends Controller
 {
@@ -23,5 +24,9 @@ class BookController extends Controller
         
         return response()->json($books);
     }
+
+    public function popular() {
+        $books = Book::orderBy('views','desc')->take(3)->get();
+        return response()->json($books);
+    }
 }
- 
