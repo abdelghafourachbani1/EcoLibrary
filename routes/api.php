@@ -31,5 +31,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::delete('/books/{id}', [BookController::class, 'destroy']);
 
     Route::get('/stats/most-viewed', [StatisticsController::class, 'mostViewed']);
+    Route::get('/stats/degraded', [StatisticsController::class, 'degradedBooks']);
+    Route::get('/stats/collection', [StatisticsController::class, 'collectionStats']);
 });
 
