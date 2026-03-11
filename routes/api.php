@@ -15,3 +15,4 @@ Route::middleware('auth:sanctum')->group(function(){
 Route::post('/register',[AuthController::class , 'register']);
 Route::post('/login',[AuthController::class, 'login']);
 Route::get('/categories/{id}/books', [BookController::class , 'booksByCategory']);
+Route::get('/books/search', [BookController::class , 'search']);
