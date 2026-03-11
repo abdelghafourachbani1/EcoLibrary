@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,3 +14,4 @@ Route::middleware('auth:sanctum')->group(function(){
 
 Route::post('/register',[AuthController::class , 'register']);
 Route::post('/login',[AuthController::class, 'login']);
+Route::get('/categories/{id}/books', [BookController::class , 'booksByCategory']);
