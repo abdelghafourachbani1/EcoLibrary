@@ -22,13 +22,15 @@ Route::get('/books/popular', [BookController::class, 'popular']);
 Route::get('/books/new', [BookController::class, 'newBooks']);
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::post('/categories',[categoryController::class , 'store']);
-    Route::put('/categories/{id}',[categoryController::class , 'update']);
-    Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+    // Route::post('/categories',[categoryController::class , 'store']);
+    // Route::put('/categories/{id}',[categoryController::class , 'update']);
+    // Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+    Route::apiResource('categories', categoryController::class);
 
-    Route::post('/books', [BookController::class, 'store']);
-    Route::put('/books/{id}', [BookController::class, 'update']);
-    Route::delete('/books/{id}', [BookController::class, 'destroy']);
+    // Route::post('/books', [BookController::class, 'store']);
+    // Route::put('/books/{id}', [BookController::class, 'update']);
+    // Route::delete('/books/{id}', [BookController::class, 'destroy']);
+    Route::apiResource('books', BookController::class);
 
     Route::get('/stats/most-viewed', [StatisticsController::class, 'mostViewed']);
     Route::get('/stats/degraded', [StatisticsController::class, 'degradedBooks']);
